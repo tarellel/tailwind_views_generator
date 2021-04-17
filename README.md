@@ -4,7 +4,7 @@
 
 This gem is used for generating tailwind based scaffold views for your Rails application. They can be Erb, Slim, or HAML. You can include pagination (using Pagy), simple_form (for the form components), and if you'd like you can utilize the meta-tags gems to all dynamic page titles when switching between your view components.
 
-This is more or less a sister project of the [bootstrap_views_generator](https://github.com/tarellel/bootstrap_views_generator) and [semantic_ui_views_generator](https://github.com/tarellel/semantic_ui_views_generator) gems, but for those who prefer to use TailwindCSS.
+This is more or less a sister project of the [bootstrap_views_generator](https://github.com/tarellel/bootstrap_views_generator) and [semantic_ui_views_generator](https://github.com/tarellel/semantic_ui_views_generator) gems, but for those who prefer to use TailwindCSS. If you are using [simple_form](https://github.com/heartcombo/simple_form) I've also created a simple_form [config](https://github.com/tarellel/simple_form-tailwind) for styling your forms with Tailwind.
 
 ## Installation
 
