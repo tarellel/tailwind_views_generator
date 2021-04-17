@@ -1,0 +1,13 @@
+.md:mx-auto.md:max-w-md.overflow-hidden.mx-0
+  .shadow-md.rounded.px-8.pt-6.pb-8.mb-4.flex.flex-col.justify-center.bg-gray-50
+<%- if options[:metatags] -%>
+    h2.text-center.text-xl.text-black = title('Log In')
+<%- else -%>
+    h2.text-center.text-xl.text-black Log In
+<%- end -%>
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.input :email, required: false, autofocus: true, input_html: { autocomplete: 'email' }
+      = f.input :password, required: false, input_html: { autocomplete: 'current-password' }
+      = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+      = f.button :submit, 'Log in', class: 'w-full'
+    = render 'devise/shared/links'

@@ -1,0 +1,27 @@
+<div class="md:mx-auto md:max-w-md overflow-hidden mx-0">
+  <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center bg-gray-50">
+    <h2 class="text-center text-xl text-black">
+<%- if options[:metatags] -%>
+      <%%= title("Edit #{resource_name.to_s.humanize}") %>
+<%- else -%>
+      <%%= "Edit #{resource_name.to_s.humanize}" %>
+<%- end -%>
+    </h2>
+    <hr class="my-5">
+    <%% simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%%= f.error_notification %>
+      <%%= f.input :email, required: true, autofocus: true %>
+      <%%- if devise_mapping confirmable? && resource pending_reconfirmation? %>
+        <p><%%= "Currently waiting confirmation for: #{resource.unconfirmed_email}" %></p>
+      <%%- end %>
+      <%%= f.input :password, hint: "Leave it blank if you don't want to change it", required: false, input_html: { autocomplete: 'new-password' } %>
+      <%%= f.input :password_confirmation, required: false, input_html: { autocomplete: 'new-password' } %>
+      <%%= f.input :current_password, hint: 'We need your current password to confirm your changes', required: true, input_html: { autocomplete: 'current-password' } %>
+      <%%= f.button :submit, 'Update', class: 'w-full' %>
+    <%% end %>
+    <hr class="my-5">
+    <%%= button_to 'Cancel my account', registration_path(resource_name), class: 'my-2 bg-red-500 hover:bg-red-700 text-white font-bold text-sm py-2 px-4 rounded w-full', data: { confirm: 'Are you sure? You cannot undo this ' }, method: :delete %>
+    <hr class="my-5">
+    <%%= link_to 'Back', :back %>
+  </div>
+</div>

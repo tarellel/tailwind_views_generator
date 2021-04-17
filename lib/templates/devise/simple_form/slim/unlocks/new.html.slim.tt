@@ -1,0 +1,12 @@
+.md:mx-auto.md:max-w-md.overflow-hidden.mx-0
+  .shadow-md.rounded.px-8.pt-6.pb-8.mb-4.flex.flex-col.justify-center.bg-gray-50
+<%- if options[:metatags] -%>
+    h2.text-center.text-xl.text-black = title('Resend unlock instructions')
+<%- else -%>
+    h2.text-center.text-xl.text-black Resend unlock instructions
+<%- end -%>
+    = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      = f.input :email, autofocus: true, placeholder: 'Email Address', autocomplete: 'email'
+      = f.button :submit, 'Resend unlock instructions', class: 'w-full'
+    = render 'devise/shared/links'

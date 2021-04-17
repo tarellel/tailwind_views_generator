@@ -1,0 +1,12 @@
+--title 'TailwindViewsGenerator'
+--quiet
+--exclude lib/tailwind_views_generator/templates
+--exclude lib/tailwind_views_generator/generators
+--exclude spec
+--asset docs/images:images
+-
+CHANGELOG.md
+LICENSE
+README.md
+*.md
+# Docs -> https://manpages.debian.org/stretch/yard/yardoc.1

@@ -1,0 +1,23 @@
+%div{class: 'md:mx-auto md:max-w-md overflow-hidden mx-0'}
+  .shadow-md.rounded.px-8.pt-6.pb-8.mb-4.flex.flex-col.justify-center.bg-gray-50
+<%- if options[:metatags] -%>
+    %h2.text-center.text-xl.text-black= title('Change your password')
+<%- else -%>
+    %h2.text-center.text-xl.text-black Change your password
+<%- end -%>
+
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      = f.hidden_field :reset_password_token
+
+      .mb-4
+        = f.label :password, "New password", class: 'text-sm font-medium text-gray-600'
+        - if @minimum_password_length
+          %em= "(#{@minimum_password_length} characters minimum)"
+          %br
+        = f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'text-sm font-medium text-gray-600'
+      .mb-4
+        = f.label :password_confirmation, "Confirm new password", class: 'text-sm font-medium text-gray-600'
+        = f.password_field :password_confirmation, autocomplete: "new-password", class: 'text-sm font-medium text-gray-600'
+      = f.submit "Change my password" class: 'my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-2 px-4 rounded w-full'
+    = render 'devise/shared/links'

@@ -1,0 +1,23 @@
+header.w-full.shadow.bg-gray-50.text-base
+  nav.flex.items-center.justify-between.flex-wrap.px-6.py-4 role="navigation" aria-label="Main"
+    .flex.items-center.flex-no-shrink.text-gray-700.mr-6
+      = link_to '<%= app_name %>', '/', class: 'font-semibold text-xl cursor-pointer hover:underline'
+    .w-full.block.flex-grow.lg:flex.lg:items-center.lg:w-auto
+      .lg:flex-grow
+        = link_to 'Home', '/', class: 'block mt-0 lg:inline-block text-gray-400 hover:text-gray-500 cursor-pointer mr-4'
+        = link_to 'Features', '#', class: 'block mt-0 lg:inline-block text-gray-400 hover:text-gray-500 cursor-pointer mr-4'
+        = link_to 'Pricing', '#', class: 'block mt-0 lg:inline-block text-gray-400 hover:text-gray-500 cursor-pointer mr-4'
+        = link_to 'Disabled', '#', class: 'block mt-0 lg:inline-block text-gray-300 cursor-default mr-4'
+    .block.lg:inline-block.leading-none.lg:pl-20.mt-3.lg:mt-0
+<%- if options[:devise] -%>
+      - if user_signed_in?
+        .flex.items-center.justify-between.flex-wrap.flex-grow.flex-col.lg:flex-row.w-100
+          = link_to destroy_user_session_path, method: :delete, class: 'block lg:inline-block w-full lg:w-auto text-gray-400 hover:text-gray-500 py-2 lg:py-0' do
+            | Logout
+            i.fas.fa-sign-out-alt.mr-1.ml-2
+      - else
+        = link_to 'Login', new_user_session_path
+<%- else -%>
+      .flex.items-center.justify-between.flex-wrap.flex-grow.flex-col.lg:flex-row.w-100
+        = link_to 'Help', '#', class: 'block lg:inline-block lg:mr-10 w-full lg:w-auto text-gray-400 hover:text-gray-500 py-2 lg:py-0'
+<%- end -%>

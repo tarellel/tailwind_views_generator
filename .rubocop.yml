@@ -1,0 +1,34 @@
+require:
+  - rubocop-performance
+
+AllCops:
+  NewCops: disable
+  Exclude:
+    - '**.gem'
+    - '**.gemspec'
+    - Gemfile
+    - Guardfile
+    - Rakefile
+    - 'bin/**'
+    - 'docs/**/*'
+    - 'hidden/**/*'
+    - 'lib/tailwind_views_generator/templates/**/*'
+    - 'node_modules/**/*'
+    - 'pkg/**/*'
+    - 'test/**/*'
+    - 'vendor/**/*'
+    - '**/*.tt'
+    - '**/*.erb'
+    - '**/*.slim'
+    - '**/*.haml'
+    - '**/*.yml'
+    - '.**'
+  TargetRubyVersion: 2.6
+  UseCache: true
+
+Layout/LineLength:
+  Max: 137
+Metrics/AbcSize:
+  Enabled: false
+Style/Documentation:
+  Enabled: false

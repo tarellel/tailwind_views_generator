@@ -1,0 +1,3 @@
+- if !@pagy.nil? && @pagy.pages > 1
+  .w-100.flex.justify-center.mt-10
+    = pagy_nav(@pagy).html_safe

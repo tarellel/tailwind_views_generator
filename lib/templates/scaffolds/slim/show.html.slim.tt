@@ -1,0 +1,18 @@
+h1.text-xl.text-gray-600.mr-10
+<%- if options[:metatags] %>
+  = title('<%%= singular_table_name.titleize %>')
+<%- else -%>
+  | <%%= plural_table_name.titleize %>
+<%- end -%>
+
+div class="border border-gray-200 my-7 shadow overflow-hidden rounded-sm"
+  dl
+<%%- attributes.reject(&:password_digest?).each do |attribute| -%>
+    div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6"
+      dt.text-sm.font-medium.text-gray-500 <%%= attribute.human_name %>
+      dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3" = @<%%= singular_table_name %>.<%%= attribute.name %>
+<%%- end -%>
+
+= link_to 'Edit', edit_<%%= singular_table_name %>_path(@<%%= singular_table_name %>), class: 'hover:underline'
+'&nbsp;|
+= link_to 'Back', <%%= index_helper %>_path, class: 'hover:underline'

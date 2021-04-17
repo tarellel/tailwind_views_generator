@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta content="IE=Edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+<%- if options[:metatags] -%>
+    = display_meta_tags site: '<%= app_name %>'
+<%- else -%>
+    title <%= app_name %>
+<%- end -%>
+    = csrf_meta_tags
+    = csp_meta_tag
+    link rel="stylesheet" href="https://rsms.me/inter/inter.css"
+    = stylesheet_link_tag 'application', media: 'all'<%= (options[:skip_turbolinks] || options[:skip_javascript]) ? '' : ", 'data-turbolinks-track': 'reload'" %>
+<%- unless options[:skip_javascript] -%>
+<%- if Gem::Version.new(Rails.version) < Gem::Version.new('6.0') -%>
+    = javascript_include_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': true" -%>
+<%- else -%>
+    = javascript_pack_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': 'reload'" -%>
+<%- end -%>
+<%- end %>
+    /! IE Polyfill for CSS Properties
+    /[if lte IE 11]
+      script window.MSInputMethodContext && document.documentMode && document.write('<scrip src="https://cdn.jsdelivr.net/gh/nuxodin/ie11CustomProperties@4.1.0/ie11CustomProperties.min.js"><\/script>');
+  body.antialiased.flex.flex-col.min-h-screen.font-sans.font-normal.leading-normal.bg-white.text-gray-400
+    = render 'shared/navigation'
+    main.w-full.flex-grow.px-5.my-7 role="main"
+      = flash_messages
+      = yield
+    = render 'shared/footer'

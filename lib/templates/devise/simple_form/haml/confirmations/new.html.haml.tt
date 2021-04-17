@@ -1,0 +1,13 @@
+.md:mx-auto.md:max-w-md.overflow-hidden.mx-0
+  .shadow-md.rounded.px-8.pt-6.pb-8.mb-4.flex.flex-col.justify-center.bg-gray-50
+<%- if options[:metatags] -%>
+    %h2.text-center.text-xl.text-black= title('Resend confirmation instructions')
+<%- else -%>
+    %h2.text-center.text-xl.text-black Resend confirmation instructions
+<%- end -%>
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = f.error_notification
+      = f.full_error :confirmation_token
+      = f.input :email, required: true, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), input_html: { autocomplete: "email" }
+      = f.button :submit, 'Resend confirmation instructions', class: 'w-full'
+    = render 'devise/shared/links'

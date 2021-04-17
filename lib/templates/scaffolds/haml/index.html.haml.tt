@@ -1,0 +1,29 @@
+.flex.flex-row.justify-start.mb-5
+  %h1.text-xl.text-gray-600.mr-10
+<%- if options[:metatags] -%>
+    = title('<%%= plural_table_name.titleize %>')
+<%- else -%>
+    <%%= plural_table_name.titleize %>
+<%- end -%>
+  = link_to 'New <%%= singular_table_name.titleize %>', new_<%%= singular_route_name %>_path, class: 'px-2 py-1 inline-flex text-xs font-semibold rounded-full bg-green-100 text-green-800 hover:bg-green-200'
+%div{class: "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"}
+  %table.min-w-full.divide-y.divide-gray-200.border-collapse
+    %thead.bg-gray-200
+      %tr
+<%% attributes.reject(&:password_digest?).each do |attribute| -%>
+        %th.px-3.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: 'col'} <%%= attribute.human_name %>
+<%% end -%>
+        %th.px-3.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: 'col', colspan: '3'}
+    %tbody.bg-white.divide-y.divide-gray-200
+      - @<%%= plural_table_name %>.each do |<%%= singular_table_name %>|
+        %tr.bg-white.hover:bg-blue-50.hover:text-gray-500
+<%% attributes.reject(&:password_digest?).each do |attribute| -%>
+          %td.px-3.py-3.text-sm.whitespace-nowrap= <%%= singular_table_name %>.<%%= attribute.column_name %>
+<%% end -%>
+          %td.px-3.py-3.text-sm.whitespace-nowrap= link_to 'Show', <%%= model_resource_name %>, class: 'inline-flex text-xs leading-5 font-semibold text-indigo-500 hover:underline cursor-pointer'
+          %td.px-3.py-3.text-sm.whitespace-nowrap= link_to 'Edit', edit_<%%= singular_route_name %>_path(<%%= singular_table_name %>), class: 'inline-flex text-xs leading-5 font-semibold text-yellow-500 hover:underline cursor-pointer'
+          %td.px-3.py-3.text-sm.whitespace-nowrap= link_to 'Destroy', <%%= model_resource_name %>, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inline-flex text-xs leading-5 font-semibold text-red-500 hover:underline cursor-pointer'
+
+<%- if options[:pagination] -%>
+  = render 'shared/pagination'
+<% end -%>

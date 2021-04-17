@@ -1,0 +1,5 @@
+<footer class="bg-gray-50 text-base">
+  <div class="container-fluid py-4 px-6">
+    <span class="text-muted"><%= app_name %> &copy; <%= Date.current.year %></span>
+  </div>
+</footer>

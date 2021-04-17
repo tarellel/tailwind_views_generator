@@ -1,0 +1,9 @@
+= simple_form_for(@<%= singular_table_name %>) do |f|
+  = errors_for(@<%= singular_table_name %>)
+
+<%- attributes.each do |attribute| -%>
+  .mb-4
+    = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+<%- end -%>
+
+  = f.button :submit, class: 'my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-2 px-4 rounded w-full'

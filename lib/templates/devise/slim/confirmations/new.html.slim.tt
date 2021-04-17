@@ -1,0 +1,16 @@
+div class='md:mx-auto md:max-w-md overflow-hidden mx-0'
+  .shadow-md.rounded.px-8.pt-6.pb-8.mb-4.flex.flex-col.justify-center.bg-gray-50
+    h2.text-center.text-xl.text-black
+<%- if options[:metatags] -%>
+      = title('Resend confirmation instructions')
+<%- else -%>
+      | Resend confirmation instructions
+<%- end -%>
+
+    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      .mb-4
+        = f.label :email, class: 'text-sm font-medium text-gray-600'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out'
+      = f.submit "Resend confirmation instructions" class: 'my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-2 px-4 rounded w-full'
+    = render 'devise/shared/links' %>

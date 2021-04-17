@@ -1,0 +1,13 @@
+%div{class: 'md:mx-auto w-full lg:w-1/2 overflow-hidden mx-0'}
+  .shadow-md.rounded.px-8.pt-6.pb-8.mb-4.flex.flex-col.justify-center.bg-gray-50
+    %h2.text-center.text-xl.text-black.mb-3
+<%- if options[:metatags] %>
+      = title('Editing <%%= singular_table_name.titleize %>')
+<%- else -%>
+      Editing <%%= plural_table_name.titleize %>
+<%- end -%>
+    = render 'form', <%%= singular_table_name %>: @<%%= singular_table_name %>
+
+= link_to 'Show', @<%%= singular_table_name %>
+|
+= link_to 'Back', <%%= index_helper %>_path
