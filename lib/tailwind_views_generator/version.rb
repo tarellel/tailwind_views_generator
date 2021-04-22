@@ -2,5 +2,5 @@
 
 module TailwindViewsGenerator
   MIN_RUBY_VERSION = '2.4.0'
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
 end

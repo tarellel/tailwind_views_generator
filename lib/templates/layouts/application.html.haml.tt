@@ -13,14 +13,16 @@
     = csrf_meta_tags
     = csp_meta_tag
     %link{href: "https://rsms.me/inter/inter.css", rel: "stylesheet"}
-    = stylesheet_link_tag 'application', media: 'all'<%= (options[:skip_turbolinks] || options[:skip_javascript]) ? '' : ", 'data-turbolinks-track': 'reload'" %>
 <%- unless options[:skip_javascript] -%>
-<%- if Gem::Version.new(Rails.version) < Gem::Version.new('6.0') -%>
-    = javascript_include_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': true" -%>
+    <%- if Gem::Version.new(Rails.version) < Gem::Version.new('6.0') -%>
+    = javascript_include_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': true" %>
+    <%- else -%>
+    = stylesheet_pack_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': 'reload'" %>
+    = javascript_pack_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': 'reload'" %>
+    <%- end -%>
 <%- else -%>
-    = javascript_pack_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': 'reload'" -%>
+    = stylesheet_link_tag 'application', media: 'all'<%= (options[:skip_turbolinks] || options[:skip_javascript]) ? '' : ", 'data-turbolinks-track': 'reload'" %>
 <%- end -%>
-<%- end %>
     / IE Polyfill for CSS Properties
     /[if lte IE 11]
       <script>window.MSInputMethodContext && document.documentMode && document.write('<scrip src="https://cdn.jsdelivr.net/gh/nuxodin/ie11CustomProperties@4.1.0/ie11CustomProperties.min.js"><\/script>');</script>

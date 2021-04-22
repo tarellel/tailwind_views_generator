@@ -12,13 +12,15 @@
     <%%= csrf_meta_tags %>
     <%%= csp_meta_tag %>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-    <%%= stylesheet_link_tag 'application', media: 'all'<%= (options[:skip_turbolinks] || options[:skip_javascript]) ? '' : ", 'data-turbolinks-track': 'reload'" %> %>
 <%- unless options[:skip_javascript] -%>
-<%- if Gem::Version.new(Rails.version) < Gem::Version.new('6.0') -%>
+  <%- if Gem::Version.new(Rails.version) < Gem::Version.new('6.0') -%>
     <%%= javascript_include_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': true" -%> %>
-<%- else -%>
+  <%- else -%>
+    <%%= stylesheet_pack_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': 'reload'" -%> %>
     <%%= javascript_pack_tag 'application'<%= options[:skip_turbolinks] ? '' : ", 'data-turbolinks-track': 'reload'" -%> %>
-<%- end -%>
+  <%- end -%>
+<%- else -%>
+    <%%= stylesheet_link_tag 'application', media: 'all'<%= (options[:skip_turbolinks] || options[:skip_javascript]) ? '' : ", 'data-turbolinks-track': 'reload'" %> %>
 <%- end -%>
     <!--IE Polyfill for CSS Properties-->
     <!--[if lte IE 11]>
